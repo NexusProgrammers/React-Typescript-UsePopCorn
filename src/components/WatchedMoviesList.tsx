@@ -1,10 +1,6 @@
-import { FC } from "react";
-import WatchedMovie from "./WatchedMovie";
+import WatchedMovie  from './WatchedMovie';
 
-const WatchedMoviesList: FC<WatchedMoviesListProps> = ({
-  watched,
-  onDeleteWatched,
-}) => {
+const WatchedMoviesList = ({ watched, onDeleteWatched }) => {
   return (
     <ul className="list">
       {watched.map((movie) => (
@@ -18,4 +14,5 @@ const WatchedMoviesList: FC<WatchedMoviesListProps> = ({
   );
 };
 
-export default WatchedMoviesList;
+
+export default WatchedMoviesList

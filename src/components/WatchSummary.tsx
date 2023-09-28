@@ -1,14 +1,9 @@
-import React from "react";
-import average from "./Average";
+import average from "./average";
 
-const WatchSummary: React.FC<WatchSummaryProps> = ({ watched }) => {
-  const avgImdbRating = average(
-    watched.map((movie) => parseFloat(movie.imdbRating))
-  );
-  const avgUserRating = average(
-    watched.map((movie) => parseFloat(movie.userRating))
-  );
-  const avgRuntime = average(watched.map((movie) => parseFloat(movie.runtime)));
+const WatchSummary = ({ watched }: { watched: Movie[] }) => {
+  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
+  const avgUserRating = average(watched.map((movie) => movie.userRating));
+  const avgRuntime = average(watched.map((movie) => movie.runtime));
 
   return (
     <div className="summary">
@@ -28,7 +23,7 @@ const WatchSummary: React.FC<WatchSummaryProps> = ({ watched }) => {
         </p>
         <p>
           <span>⏳</span>
-          <span>{avgRuntime.toFixed(2)} min</span>
+          <span>{avgRuntime} min</span>
         </p>
       </div>
     </div>

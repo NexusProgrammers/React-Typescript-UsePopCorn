@@ -1,9 +1,4 @@
-import { FC } from "react";
-
-const WatchedMovie: FC<WatchedMovieProps> = ({
-  movie,
-  onDeleteWatched,
-}) => {
+const WatchedMovie = ({ movie, onDeleteWatched }) => {
   return (
     <li>
       <img src={movie.poster} alt={`${movie.title} poster`} />
