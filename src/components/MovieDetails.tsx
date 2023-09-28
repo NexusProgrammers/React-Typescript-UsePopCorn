@@ -3,41 +3,6 @@ import useKey from "./useKey";
 import Loader from "./Loader";
 import StarRating from "./StarRating";
 
-interface Movie {
-  Actors: string;
-  Awards: string;
-  BoxOffice: string;
-  Country: string;
-  DVD: string;
-  Director: string;
-  Genre: string;
-  Language: string;
-  Metascore: string;
-  Plot: string;
-  Poster: string;
-  Production: string;
-  Rated: string;
-  Ratings: Array<{ Source: string; Value: string }>;
-  Released: string;
-  Response: string;
-  Runtime: string;
-  Title: string;
-  Type: string;
-  Website: string;
-  Writer: string;
-  Year: string;
-  imdbID: string;
-  imdbRating: string;
-  imdbVotes: string;
-}
-
-interface MovieDetailsProps {
-  selectedId: string;
-  onCloseMovie: () => void;
-  onAddWatched: (movie: Movie) => void;
-  watched: Movie[];
-}
-
 const MovieDetails: React.FC<MovieDetailsProps> = ({
   selectedId,
   onCloseMovie,
@@ -45,34 +10,13 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
   watched,
 }) => {
   const [movie, setMovie] = useState<Movie>({
-    Actors: "",
-    Awards: "",
-    BoxOffice: "",
-    Country: "",
-    DVD: "",
-    Director: "",
-    Genre: "",
-    Language: "",
-    Metascore: "",
-    Plot: "",
-    Poster: "",
-    Production: "",
-    Rated: "",
-    Ratings: [],
-    Released: "",
-    Response: "",
-    Runtime: "",
-    Title: "",
-    Type: "",
-    Website: "",
-    Writer: "",
-    Year: "",
     imdbID: "",
+    title: "",
+    year: "",
+    poster: "",
     imdbRating: "",
-    imdbVotes: "",
+    runtime: "",
   });
-
-  console.log("movie details here", movie);
 
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState<string>("");
@@ -89,16 +33,16 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
   )?.userRating;
 
   const {
-    Title: title,
-    Year: year,
-    Poster: poster,
-    Runtime: runtime,
+    title,
+    year,
+    poster,
+    runtime,
     imdbRating,
-    Plot: plot,
-    Released: released,
-    Actors: actors,
-    Director: director,
-    Genre: genre,
+    plot,
+    released,
+    actors,
+    director,
+    genre,
   } = movie;
 
   const isTop = Number(imdbRating) > 8;
@@ -106,29 +50,13 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({
   function handleAdd() {
     const newWatchedMovie: Movie = {
       imdbID: selectedId,
-      Title: title,
-      Year: year,
-      Poster: poster,
-      imdbRating: imdbRating,
-      Runtime: runtime.split(" ")[0],
-      Rated: "",
-      Ratings: [],
-      Genre: genre,
-      Director: director,
-      Writer: "",
-      Actors: actors,
-      Plot: plot,
-      Language: "",
-      Country: "",
-      Awards: "",
-      Metascore: "",
-      imdbVotes: "",
-      Production: "",
-      Website: "",
-      DVD: "",
-      BoxOffice: "",
-      Type: "",
-      Response: "",
+      title,
+      year,
+      poster,
+      imdbRating,
+      runtime: runtime.split(" ")[0],
+      userRating,
+      countRatingDecisions: countRef.current,
     };
 
     onAddWatched(newWatchedMovie);

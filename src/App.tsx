@@ -15,14 +15,12 @@ import {
   useMovies,
 } from "./components";
 
-
-
 const App: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const { movies, isLoading, error } = useMovies(query);
 
-  const [watched, setWatched] = useLocalStorageState<Movie[]>([], "watched");
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   function handleSelectMovie(id: string) {
     setSelectedId((prevId) => (id === prevId ? null : id));
@@ -32,13 +30,14 @@ const App: React.FC = () => {
     setSelectedId(null);
   }
 
-  function handleAddWatched(movie: Movie) {
+  function handleAddWatched(movie) {
+    
     setWatched((prevWatched) => [...prevWatched, movie]);
   }
 
   function handleDeleteWatched(id: string) {
     setWatched((prevWatched) =>
-      prevWatched.filter((movie) => movie.imdbID !== id)
+      prevWatched.filter((movie: { imdbID: string; }) => movie.imdbID !== id)
     );
   }
 
